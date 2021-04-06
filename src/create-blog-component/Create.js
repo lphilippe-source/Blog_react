@@ -1,44 +1,42 @@
-import { useState } from "react";
+// import { useState } from "react";
+import {HookSubmit} from "./providers/hookSubmit";
 
-const Create = () => {
-    const[title,setTitle] = useState('')
-    const[body,setBody] = useState('')
-    const[author,setAuthor] = useState('mario')
-    const handleSubmit = (e)=>{
-        e.preventDefault()
-        const blog = {title,body,author}
-        fetch("https://localhost:8000/blog/submit", {
-            method:'POST',
-            headers:{"Content-Type": "application/json"},
-            body: JSON.stringify(blog)
-        }).then((res)=>{
-            console.log(res)
-            console.log('new blog added')
-        })
-    }
+export const Create = ({someStuff}) => {
+    console.log("props: ",someStuff)
+const [
+    options,
+    url,
+    title,body,author,submited,
+    handleSubmit,
+    handleChangeAuthor,
+    handleChangeTitle,
+    handleChangeBody,
+] = someStuff()
+
     return ( 
         <div className="create">
             <h2>blog</h2>
+            {submited && <HookSubmit url={url} options={options}/>}
             <form onSubmit={handleSubmit} action="">
                 <label >Blog Title:</label>
                 <input 
                 type="text"
                 required
                 value={title}
-                onChange={(e)=>{return setTitle(e.target.value)}}
+                onChange={handleChangeTitle}
                 />
                 <label >Blog Body:</label>
                 <textarea 
                 type="text"
                 required
                 value={body}
-                onChange={(e)=>{return setBody(e.target.value)}}
+                onChange={handleChangeBody}
 
                 ></textarea>
                 <label >Blog Author:</label>
                 <select
                 value={author}
-                onChange={(e)=>setAuthor(e.target.value)}
+                onChange={handleChangeAuthor}
                  name=""
                   id="">
                     <option value="mario">mario</option>
@@ -48,11 +46,7 @@ const Create = () => {
                 <p>{title}</p>
                 <p>{body}</p>
                 <p>{author}</p>
-
-
             </form>
         </div>
      );
 }
- 
-export default Create;

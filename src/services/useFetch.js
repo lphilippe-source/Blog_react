@@ -1,12 +1,12 @@
 import { useEffect,useState } from 'react'
 
-export const useFetch = (url) => {
+export const useFetch = (url,options) => {
     const[error, setError] = useState(null);
     const [isPending,setPending] = useState(true)
     const[lists,setLists] = useState(null)
-
+    
     useEffect(()=>{
-        fetch(url)
+        fetch(url,options)
         .then(res=>{
             console.log(res)
             if(!res.ok){
@@ -27,7 +27,7 @@ export const useFetch = (url) => {
             setPending(false)
         })
         return console.log('cleanup')
-    },[url])
+    },[url,options])
 
     return {error, isPending, lists }
 
