@@ -1,8 +1,7 @@
-const List = ({list}) => {
-    
-    return (
+const List = ({list,onClick}) => {
 
-        <div className="blog-preview">
+    return (
+        <div onClick={()=>onClick(list)} className="blog-preview">
         <h2 >{list.title}</h2>
         <p>Written by {list.author}</p>
         </div>
