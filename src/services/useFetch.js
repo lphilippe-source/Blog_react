@@ -8,14 +8,12 @@ export const useFetch = (url,options) => {
     useEffect(()=>{
         fetch(url,options)
         .then(res=>{
-            console.log(res)
             if(!res.ok){
                 throw Error("impossible d'atteindre le serveur")
             }
                 return res.json()
         })
         .then((data)=>{
-            console.log('data: ',data)
                 setLists(data)
                 setPending(false)
                 setError(null)

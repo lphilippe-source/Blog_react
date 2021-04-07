@@ -1,6 +1,6 @@
 import './index.css';
 import HomeManager from './home-component/HomeManager';
-import Navbar from './Navbar';
+import NavbarManager from './navbar-component/NavbarManager';
 import { BrowserRouter as Router, Route,  Switch } from 'react-router-dom';
 import CreateManager from './create-blog-component/CreateManager';
 
@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
     <div className="App">
-      <Navbar/>
+      <NavbarManager/>
       <Switch>
         <Route exact path="/">
           <HomeManager/>
