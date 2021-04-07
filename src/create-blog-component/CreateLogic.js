@@ -1,7 +1,7 @@
 import {useState} from 'react'
 
 export const CreateLogic = ({children}) => {
-    const [hookSubmit,Create] = children
+    const[hookSubmit,Create] = children
     const[title,setTitle] = useState('')
     const[body,setBody] = useState('')
     const[author,setAuthor] = useState('mario')
