@@ -1,7 +1,7 @@
 import {useState} from 'react'
 
 export const CreateLogic = ({children}) => {
-    console.log("children: ",children)
+    const [hookSubmit,Create] = children
     const[title,setTitle] = useState('')
     const[body,setBody] = useState('')
     const[author,setAuthor] = useState('mario')
@@ -18,27 +18,26 @@ export const CreateLogic = ({children}) => {
         headers:{"Content-Type": "application/json"},
         body: JSON.stringify(blog)
     }
-
     const handleSubmit = (e)=>{
         e.preventDefault()
         setSubmited(true)
     }
-
-    const someStuff = ()=>{
+    function logicData(){
         return [
-            options,
-            url,
-            title,body,author,submited,
+            title,body,author,
             handleSubmit,
             handleChangeAuthor,
             handleChangeTitle,
             handleChangeBody,
         ]
     }
+    function fetchParams(){
+        return [url,options]
+    }
 
     return (
         <>
-        {children(someStuff)}
+        {submited ? hookSubmit(fetchParams) : Create(logicData)}
         </>
     );
 }

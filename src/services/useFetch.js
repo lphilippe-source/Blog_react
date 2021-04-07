@@ -1,7 +1,7 @@
 import { useEffect,useState } from 'react'
 
 export const useFetch = (url,options) => {
-    const[error, setError] = useState(null);
+    const[error, setError] = useState(null)
     const [isPending,setPending] = useState(true)
     const[lists,setLists] = useState(null)
     
@@ -16,11 +16,9 @@ export const useFetch = (url,options) => {
         })
         .then((data)=>{
             console.log('data: ',data)
-            setTimeout(()=>{
                 setLists(data)
                 setPending(false)
                 setError(null)
-            },1000)
         })
         .catch(error=>{
             setError(error.message)

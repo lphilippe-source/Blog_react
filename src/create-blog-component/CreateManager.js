@@ -1,11 +1,13 @@
 import {Create} from './Create'
 import {CreateLogic} from './CreateLogic'
+import {HookSubmit} from './providers/hookSubmit'
 
 const CreateManager = () => {
 
     return (
         <CreateLogic>
-        {(truc)=><Create someStuff={truc}/>}
+        {(params)=><HookSubmit fetchParams={params}/>}
+        {(params)=><Create logicData={params}/>}
         </CreateLogic>
     );
 }
