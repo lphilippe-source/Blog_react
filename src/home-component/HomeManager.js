@@ -2,6 +2,7 @@ import List from "./views/List"
 import Title from "./views/Title"
 import HomeLogic from "./HomeLogic"
 import Detail from "./views/Detail"
+import HookDelete from "./provider/hookDelete"
 
 const HomeManager = () => {
     
@@ -9,9 +10,10 @@ const HomeManager = () => {
         <div className="Home">
             <HomeLogic>
             {(title)=><Title title={title}/>}
-
-            {(fetchedData,toggleContent)=>
+            {(fetchParams)=><HookDelete params={fetchParams}/>}
+            {(fetchedData,toggleContent,handleDelete)=>
                 <List 
+                deleteButton={handleDelete}
                 onClick={toggleContent} 
                 list={fetchedData} 
                 key={fetchedData.id}/>
