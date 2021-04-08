@@ -1,5 +1,5 @@
 import {useFetch} from '../services/useFetch'
-import {useState,useEffect} from 'react'
+import {useState} from 'react'
 const HomeLogic = ({children}) => {
 
     const title = "all blogs!"

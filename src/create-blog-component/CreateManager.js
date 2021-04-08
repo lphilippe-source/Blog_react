@@ -1,4 +1,4 @@
-import {Create} from './Create'
+import {Create} from './views/Create'
 import {CreateLogic} from './CreateLogic'
 import {HookSubmit} from './providers/hookSubmit'
 

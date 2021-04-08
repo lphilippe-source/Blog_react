@@ -1,7 +1,7 @@
 import NavbarLogic from "./NavbarLogic"
-import Navbar from "./Navbar"
+import Navbar from "./views/Navbar"
 import{ Link } from 'react-router-dom'
-import Logo from "./Logo"
+import Logo from "./views/Logo"
 
 const NavbarManager = () => {
     return (

@@ -1,7 +1,7 @@
-import List from "./List"
-import Title from "./Title"
+import List from "./views/List"
+import Title from "./views/Title"
 import HomeLogic from "./HomeLogic"
-import Detail from "./Detail"
+import Detail from "./views/Detail"
 
 const HomeManager = () => {
     
