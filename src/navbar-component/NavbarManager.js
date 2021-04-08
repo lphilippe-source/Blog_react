@@ -7,8 +7,7 @@ const NavbarManager = () => {
     return (
         <NavbarLogic>
             {(importedLinks,logo)=><Navbar Links={importedLinks}>{logo}</Navbar>}
-            {
-            (linkData)=>
+            {(linkData)=>
                 <Link
                 to={linkData.route} 
                 key={linkData.id}

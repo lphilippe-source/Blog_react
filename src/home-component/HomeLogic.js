@@ -19,7 +19,7 @@ const HomeLogic = ({children}) => {
         <>
         {returnTitle(title)}
 
-        {showContent ? returnDetail(content) :
+        {showContent ? returnDetail(content,toggleContent) :
         lists && lists.map((list)=>{return returnList(list,toggleContent)})}
         </> 
     )

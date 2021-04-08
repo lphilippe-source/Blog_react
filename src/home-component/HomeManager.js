@@ -9,14 +9,19 @@ const HomeManager = () => {
         <div className="Home">
             <HomeLogic>
             {(title)=><Title title={title}/>}
-            {
-                (fetchedData,toggleContent)=>
-                    <List 
-                    onClick={toggleContent} 
-                    list={fetchedData} 
-                    key={fetchedData.id}/>
+
+            {(fetchedData,toggleContent)=>
+                <List 
+                onClick={toggleContent} 
+                list={fetchedData} 
+                key={fetchedData.id}/>
             }
-            {(listContent)=><Detail className="blog-detail" content={listContent}/>}
+
+            {(listContent,toggleContent)=>
+                <Detail 
+                className="blog-detail"
+                closeButton={toggleContent}
+                content={listContent}/>}
             </HomeLogic>
         </div>
     )

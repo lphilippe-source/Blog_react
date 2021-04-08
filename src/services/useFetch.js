@@ -1,7 +1,7 @@
 import { useEffect,useState } from 'react'
 
 export const useFetch = (url,options) => {
-    const[error, setError] = useState(null)
+    const[error,setError] = useState(null)
     const [isPending,setPending] = useState(true)
     const[lists,setLists] = useState(null)
     
@@ -14,9 +14,9 @@ export const useFetch = (url,options) => {
                 return res.json()
         })
         .then((data)=>{
-                setLists(data)
-                setPending(false)
-                setError(null)
+            setLists(data)
+            setPending(false)
+            setError(null)
         })
         .catch(error=>{
             setError(error.message)
