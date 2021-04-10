@@ -11,7 +11,7 @@ const HomeLogic = ({children}) => {
     const[deleteButton,setDeleteButton] = useState(false)
     const {error, isPending, lists } = useFetch(url, null)
     const [deleteBlogId,setDeleteBlogId]= useState('')
-
+    
     const toggleContent=(customEvent)=>{
         setShowContent(!showContent)
         setContent(customEvent)
@@ -23,7 +23,7 @@ const HomeLogic = ({children}) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(deleteBlogId)
-      }
+    }
     const deleteUrl = "https://localhost:8000/blog/delete"
     const handleDelete=(blogId)=>{
         setDeleteButton(true)
@@ -36,7 +36,11 @@ const HomeLogic = ({children}) => {
 
     function mapList(){
         return lists && lists.map(
-            (list)=>returnList(list,toggleContent,handleDelete))
+            (list,i)=>{
+                let temp = Object.assign({}, list)
+                temp.author = list.author.firstName
+                return returnList(temp,toggleContent,handleDelete)},lists
+        )
     }
 
     function detailOrList(){

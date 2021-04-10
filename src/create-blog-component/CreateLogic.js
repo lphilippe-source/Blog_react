@@ -1,7 +1,7 @@
 import {useState} from 'react'
 
 export const CreateLogic = ({children}) => {
-    const[hookSubmit,Create] = children
+    const[hookSubmit,returnCreate] = children
     const[title,setTitle] = useState('')
     const[body,setBody] = useState('')
     const[author,setAuthor] = useState('mario')
@@ -37,7 +37,7 @@ export const CreateLogic = ({children}) => {
 
     return (
         <>
-        {submited ? hookSubmit(fetchParams) : Create(logicData)}
+        {submited ? hookSubmit(fetchParams) : returnCreate(logicData)}
         </>
     );
 }

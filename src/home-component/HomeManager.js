@@ -20,8 +20,7 @@ const HomeManager = () => {
             }
 
             {(listContent,toggleContent)=>
-                <Detail 
-                className="blog-detail"
+                <Detail
                 closeButton={toggleContent}
                 content={listContent}/>}
             </HomeLogic>
