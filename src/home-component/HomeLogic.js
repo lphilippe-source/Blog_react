@@ -11,7 +11,7 @@ const HomeLogic = ({children}) => {
     const[deleteButton,setDeleteButton] = useState(false)
     const {error, isPending, lists } = useFetch(url, null)
     const [deleteBlogId,setDeleteBlogId]= useState('')
-    
+
     const toggleContent=(customEvent)=>{
         setShowContent(!showContent)
         setContent(customEvent)
@@ -36,10 +36,10 @@ const HomeLogic = ({children}) => {
 
     function mapList(){
         return lists && lists.map(
-            (list,i)=>{
-                let temp = Object.assign({}, list)
+            (list)=>{
+                const temp = {...list}
                 temp.author = list.author.firstName
-                return returnList(temp,toggleContent,handleDelete)},lists
+                return returnList(temp,toggleContent,handleDelete)}
         )
     }
 
