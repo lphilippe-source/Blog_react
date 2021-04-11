@@ -15,7 +15,7 @@ const HomeManager = () => {
                 <List 
                 deleteButton={handleDelete}
                 onClick={toggleContent} 
-                list={fetchedData} 
+                list={fetchedData}
                 key={fetchedData.id}/>
             }
 

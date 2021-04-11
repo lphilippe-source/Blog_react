@@ -1,10 +1,15 @@
 import {useState} from 'react'
+import {useFetch} from '../services/useFetch'
 
 export const CreateLogic = ({children}) => {
-    const[hookSubmit,returnCreate] = children
+    const[hookSubmit,returnCreate,returnOptionList] = children
+
+    const urlFetchUser = "https://localhost:8000/blog/user"
+    const {error, isPending, lists } = useFetch(urlFetchUser,null)
+
     const[title,setTitle] = useState('')
     const[body,setBody] = useState('')
-    const[author,setAuthor] = useState('mario')
+    const[author,setAuthor] = useState('auteur')
     const[submited,setSubmited] = useState(false)
 
     const handleChangeTitle = (e)=>setTitle(e.target.value)
@@ -22,22 +27,32 @@ export const CreateLogic = ({children}) => {
         e.preventDefault()
         setSubmited(true)
     }
+    function returnUserList(){
+        return lists && lists.map((list)=>{
+            return returnOptionList(list)
+        })
+    }
+
     function logicData(){
         return [
             title,body,author,
             handleSubmit,
             handleChangeAuthor,
             handleChangeTitle,
-            handleChangeBody,
+            handleChangeBody
         ]
     }
     function fetchParams(){
         return [url,options]
     }
 
+    function display(){
+        return submited ? hookSubmit(fetchParams) : returnCreate(logicData,returnUserList())
+
+    }
     return (
         <>
-        {submited ? hookSubmit(fetchParams) : returnCreate(logicData)}
+        {isPending ? <div>loading...</div> : display()}
         </>
     );
 }

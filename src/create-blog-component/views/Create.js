@@ -1,15 +1,14 @@
-export const Create = ({logicData}) => {
+export const Create = ({logicData,children}) => {
 
     const [
         title,body,author,
         handleSubmit,
         handleChangeAuthor,
         handleChangeTitle,
-        handleChangeBody,
+        handleChangeBody
     ] = logicData()
-
-    return ( 
-        <div className="create">
+     
+    return <div className="create">
             <h2>blog</h2>
             <form onSubmit={handleSubmit} action="">
                 <label >Blog Title:</label>
@@ -33,8 +32,7 @@ export const Create = ({logicData}) => {
                 onChange={handleChangeAuthor}
                  name=""
                   id="">
-                <option value="mario">mario</option>
-                <option value="yoshi">yoshi</option>
+                    {children}
                 </select>
                 <button>Add Blog</button>
                 <p>{title}</p>
@@ -42,5 +40,5 @@ export const Create = ({logicData}) => {
                 <p>{author}</p>
             </form>
         </div>
-     );
+     ;
 }
