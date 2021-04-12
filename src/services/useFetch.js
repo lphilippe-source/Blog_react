@@ -11,6 +11,7 @@ export const useFetch = (url,options) => {
             if(!res.ok){
                 throw Error("impossible d'atteindre le serveur")
             }
+            // console.log(res)
                 return res.json()
         })
         .then((data)=>{

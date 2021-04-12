@@ -28,7 +28,7 @@ export const CreateLogic = ({children}) => {
         setSubmited(true)
     }
     function returnUserList(){
-        return lists && lists.map((list)=>{
+        return lists && JSON.parse(lists).map((list)=>{
             return returnOptionList(list)
         })
     }

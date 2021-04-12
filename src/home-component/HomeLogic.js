@@ -35,7 +35,7 @@ const HomeLogic = ({children}) => {
     }
 
     function mapList(){
-        return lists && lists.map(
+        return lists && JSON.parse(lists).map(
             (list)=>{
                 const temp = {...list}
                 temp.author = list.author.firstName
