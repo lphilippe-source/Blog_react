@@ -3,6 +3,7 @@ import HomeManager from './home-component/HomeManager';
 import NavbarManager from './navbar-component/NavbarManager';
 import { BrowserRouter as Router, Route,  Switch } from 'react-router-dom';
 import CreateManager from './create-blog-component/CreateManager';
+import SignupManager from './signup-component/SignupManager';
 
 function App() {
 
@@ -16,6 +17,9 @@ function App() {
         </Route>
         <Route path="/blog">
           <CreateManager/>
+        </Route>
+        <Route path="/signup">
+          <SignupManager/>
         </Route>
       </Switch>
     </div>

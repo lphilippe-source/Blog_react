@@ -1,10 +1,11 @@
 
 const Navbar = ({Links,children}) => {
-    
+    const [logo, account]= children
     return (
         <nav className="navbar">
-            {children}
+            {logo}
             {Links}
+            {account}
         </nav>
      );
 }
