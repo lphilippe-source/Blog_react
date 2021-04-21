@@ -5,5 +5,6 @@ export const HookSubmit = ({fetchParams})=>{
     const {error, isPending, lists } = useFetch(url, options)
 //    const history = useHistory()
 //    history.push('/')
+console.log(lists)
     return <div> {isPending && "coucou:) ça charge!"}</div>
 }

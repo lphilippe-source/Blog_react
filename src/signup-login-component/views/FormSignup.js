@@ -2,7 +2,7 @@ const FormSignup = ({logicData}) => {
 
     const[
         password,password2,pseudo,mail,
-        handleSubmit,
+        handleSubmitSignup,
         handleChangePassword,
         handleChangePassword2,
         handleChangePseudo,
@@ -10,7 +10,7 @@ const FormSignup = ({logicData}) => {
     ]=logicData()
 
     return <div className="create">
-        <form onSubmit={handleSubmit} action="">
+        <form onSubmit={handleSubmitSignup} action="">
             <label htmlFor="userpseudo">entrez un pseudo</label>
             <input onChange={handleChangePseudo} value={pseudo} name="userpseudo" type="text"/>
 

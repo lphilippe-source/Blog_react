@@ -3,7 +3,7 @@ import HomeManager from './home-component/HomeManager';
 import NavbarManager from './navbar-component/NavbarManager';
 import { BrowserRouter as Router, Route,  Switch } from 'react-router-dom';
 import CreateManager from './create-blog-component/CreateManager';
-import SignupManager from './signup-component/SignupManager';
+import SignupManager from './signup-login-component/SignupManager';
 
 function App() {
 

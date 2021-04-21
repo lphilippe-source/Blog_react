@@ -4,7 +4,7 @@ export const useFetch = (url,options) => {
     const[error,setError] = useState(null)
     const [isPending,setPending] = useState(true)
     const[lists,setLists] = useState(null)
-    
+    console.log(options)
     useEffect(()=>{
         fetch(url,options)
         .then(res=>{
