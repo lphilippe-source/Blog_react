@@ -33,6 +33,7 @@ const SignupLogic = ({children}) => {
         const username = mail
         setUser({username,password})
         setSubmited([true,"login"])
+        console.log("handleSubmitLogin: ", true)
     }
     function logicData(){
         return [

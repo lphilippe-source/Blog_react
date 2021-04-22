@@ -1,29 +1,62 @@
-import {useFetch} from '../services/useFetch'
-import {useState} from 'react'
+import {useState, useContext, useEffect} from 'react'
+import {UserContext} from "../services/UserContext"
+import { HomeContext } from './provider/HomeContext'
 const HomeLogic = ({children}) => {
 
     const title = "all blogs!"
     const url = 'https://localhost:8000/blog'
 
-    const[returnTitle,returnHookDelete,returnList,returnDetail]=children
+    const[returnTitle,returnHookGetBlog,returnHookDelete,returnList,returnDetail]=children
     const[content,setContent] = useState('')
     const[showContent,setShowContent] = useState(false)
     const[deleteButton,setDeleteButton] = useState(false)
-    const {error, isPending, lists } = useFetch(url, null)
     const [deleteBlogId,setDeleteBlogId]= useState('')
+    const[isPromiseOk,setisPromiseOk] = useState(false)
+    const[promiseOptions,setPromiseOptions] = useState(false)
+
 
     const toggleContent=(customEvent)=>{
         setShowContent(!showContent)
         setContent(customEvent)
     }
 
+    let {token} = useContext(UserContext)
+    const {blogLists} = useContext(HomeContext)
+   
+    useEffect(()=>{
+            const getToken = async()=>{
+                return await token.token
+               }
+            const getOption = async(value)=>{
+                return await {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': 'Bearer '+value
+                    }
+                }
+            }
+            getToken()
+            .then ((res)=>{
+                console.log("1 res: ",res)
+                return getOption(res)
+            })
+            .then((res)=>{
+                console.log("2 res: ",res)
+    
+                res && setPromiseOptions(res)
+                setisPromiseOk(true)
+            })          
+    },[token])
+    
     const options={
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+token.token
         },
         body: JSON.stringify(deleteBlogId)
     }
+
     const deleteUrl = "https://localhost:8000/blog/delete"
     const handleDelete=(blogId)=>{
         setDeleteButton(true)
@@ -34,8 +67,13 @@ const HomeLogic = ({children}) => {
         return [deleteUrl,options]
     }
 
+    function fetchParams2(){
+        console.log("url options: ",url,promiseOptions)
+        return [url,promiseOptions]
+    }
+
     function mapList(){
-        return lists && JSON.parse(lists).map(
+        return blogLists && JSON.parse(blogLists).map(
             (list)=>{
                 const temp = {...list}
                 temp.author = list.author.firstName
@@ -50,6 +88,7 @@ const HomeLogic = ({children}) => {
     return (
         <>
         {returnTitle(title)}
+        {isPromiseOk && returnHookGetBlog(fetchParams2())}
         {deleteButton ? returnHookDelete(fetchParams()) : detailOrList()}
         </> 
     )
