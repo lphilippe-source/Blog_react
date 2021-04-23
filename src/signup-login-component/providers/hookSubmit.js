@@ -9,7 +9,9 @@ export const HookSubmit = ({fetchParams})=>{
     const {token,setToken} = useContext(UserContext)
     const {error, isPending, lists } = useFetch(url, options)
     
+    useEffect(()=>{
         setToken(lists)
+    })
     
 //    const history = useHistory()
 //    history.push('/')

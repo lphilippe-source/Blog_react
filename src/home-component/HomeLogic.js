@@ -1,10 +1,15 @@
 import {useState, useContext, useEffect} from 'react'
 import {UserContext} from "../services/UserContext"
 import { HomeContext } from './provider/HomeContext'
+
 const HomeLogic = ({children}) => {
 
     const title = "all blogs!"
     const url = 'https://localhost:8000/blog'
+    const deleteUrl = "https://localhost:8000/blog/delete"
+
+    let {token} = useContext(UserContext)
+    const {blogLists} = useContext(HomeContext)
 
     const[returnTitle,returnHookGetBlog,returnHookDelete,returnList,returnDetail]=children
     const[content,setContent] = useState('')
@@ -19,33 +24,30 @@ const HomeLogic = ({children}) => {
         setShowContent(!showContent)
         setContent(customEvent)
     }
-
-    let {token} = useContext(UserContext)
-    const {blogLists} = useContext(HomeContext)
    
     useEffect(()=>{
-            const getToken = async()=>{
-                return await token.token
-               }
-            const getOption = async(value)=>{
-                return await {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'authorization': 'Bearer '+value
-                    }
+        const getToken = async()=>{
+            return await token.token
+            }
+        const getOption = async(value)=>{
+            return await {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': 'Bearer '+value
                 }
             }
-            getToken()
-            .then ((res)=>{
-                console.log("1 res: ",res)
-                return getOption(res)
-            })
-            .then((res)=>{
-                console.log("2 res: ",res)
-    
-                res && setPromiseOptions(res)
-                setisPromiseOk(true)
-            })          
+        }
+        getToken()
+        .then ((res)=>{
+            console.log("1 res: ",res)
+            return getOption(res)
+        })
+        .then((res)=>{
+            console.log("2 res: ",res)
+
+            res && setPromiseOptions(res)
+            setisPromiseOk(true)
+        })          
     },[token])
     
     const options={
@@ -57,7 +59,6 @@ const HomeLogic = ({children}) => {
         body: JSON.stringify(deleteBlogId)
     }
 
-    const deleteUrl = "https://localhost:8000/blog/delete"
     const handleDelete=(blogId)=>{
         setDeleteButton(true)
         setDeleteBlogId(blogId)
