@@ -11,13 +11,13 @@ const HomeLogic = ({children}) => {
     let {token} = useContext(UserContext)
     const {blogLists} = useContext(HomeContext)
 
-    const[returnTitle,returnHookGetBlog,returnHookDelete,returnList,returnDetail]=children
-    const[content,setContent] = useState('')
-    const[showContent,setShowContent] = useState(false)
-    const[deleteButton,setDeleteButton] = useState(false)
-    const [deleteBlogId,setDeleteBlogId]= useState('')
-    const[isPromiseOk,setisPromiseOk] = useState(false)
-    const[promiseOptions,setPromiseOptions] = useState(false)
+    const [returnTitle,returnHookGetBlog,returnHookDelete,returnList,returnDetail] = children
+    const [content,setContent] = useState('')
+    const [showContent,setShowContent] = useState(false)
+    const [deleteButton,setDeleteButton] = useState(false)
+    const [deleteBlogId,setDeleteBlogId] = useState('')
+    const [isTokenOk,setIsTokenOk] = useState(false)
+    const [promiseOptions,setPromiseOptions] = useState(false)
 
 
     const toggleContent=(customEvent)=>{
@@ -39,14 +39,11 @@ const HomeLogic = ({children}) => {
         }
         getToken()
         .then ((res)=>{
-            console.log("1 res: ",res)
             return getOption(res)
         })
         .then((res)=>{
-            console.log("2 res: ",res)
-
             res && setPromiseOptions(res)
-            setisPromiseOk(true)
+            setIsTokenOk(true)
         })          
     },[token])
     
@@ -62,15 +59,6 @@ const HomeLogic = ({children}) => {
     const handleDelete=(blogId)=>{
         setDeleteButton(true)
         setDeleteBlogId(blogId)
-    }
-
-    function fetchParams(){
-        return [deleteUrl,options]
-    }
-
-    function fetchParams2(){
-        console.log("url options: ",url,promiseOptions)
-        return [url,promiseOptions]
     }
 
     function mapList(){
@@ -89,8 +77,8 @@ const HomeLogic = ({children}) => {
     return (
         <>
         {returnTitle(title)}
-        {isPromiseOk && returnHookGetBlog(fetchParams2())}
-        {deleteButton ? returnHookDelete(fetchParams()) : detailOrList()}
+        {isTokenOk && returnHookGetBlog([url,promiseOptions])}
+        {deleteButton ? returnHookDelete([deleteUrl,options]) : detailOrList()}
         </> 
     )
 }
